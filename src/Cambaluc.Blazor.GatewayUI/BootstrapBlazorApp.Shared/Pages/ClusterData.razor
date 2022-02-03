@@ -1,0 +1,74 @@
+﻿@page "/clusterdata"
+@using BootstrapBlazorApp.Model.Entity
+
+@attribute [TabItemOption(Text = "Table")]
+<PageTitle>Table</PageTitle>
+
+<h1>集群列表</h1>
+
+<Table TItem="ClusterDto" IsPagination="true" Items="dtos">
+</Table>
+<Table TItem="ClusterDto" IsPagination="true" Items="dtos"
+       IsStriped="true" IsBordered="true" ShowSkeleton="true" IsMultipleSelect="false"
+       ShowToolbar="true" ShowSearch="true" ShowExtendButtons="true"
+       UseInjectDataService="true" AutoGenerateColumns="true">
+    <TableColumns>
+        <TableColumn @bind-Field="@context.Id" Width="100" />
+        <TableColumn @bind-Field="@context.LoadBalancingPolicy" Width="80" />
+
+        <TableColumn @bind-Field="@context.SessionAffinity" Visible="false" Width="80" />
+        <TableColumn @bind-Field="@context.HealthCheck" Visible="false" Width="80" />
+        <TableColumn @bind-Field="@context.HttpClient" Visible="false" Width="80" />
+        <TableColumn @bind-Field="@context.HttpRequest" Visible="false" Width="80" />
+        <TableColumn @bind-Field="@context.Destinations" Visible="false" Width="80" />
+        <TableColumn @bind-Field="@context.Metadata" Visible="false" Width="80" />
+        <TableColumn @bind-Field="@context.ProxyRoutes" Visible="false" Width="80" />
+    </TableColumns>
+    <EditTemplate>
+        <div class="row">
+            <div class="form-group col-12 col-sm-6">
+                <BootstrapInput @bind-Value="@context.Id" placeholder="不可为空，50字以内" maxlength="50">
+                    <RequiredValidator />
+                    <StringLengthValidator Length="50" />
+                </BootstrapInput>
+            </div>
+              @if (context.Destinations == null) context.Destinations = new  List<Destination>() ;
+                @foreach (var key in (List<Destination>)@context.Destinations )
+                {
+                  <div class="form-group col-12 col-sm-6">
+                    <BootstrapInput @bind-Value="key.Name" placeholder="50字以内" maxlength="150">
+                    </BootstrapInput>
+                 </div>
+               <div class="form-group col-12 col-sm-6">
+                    <BootstrapInput @bind-Value="key.Address" placeholder="50字以内" maxlength="150">
+                    </BootstrapInput>
+                </div>
+                 <div class="form-group col-12 col-sm-6">
+                    <BootstrapInput @bind-Value="key.Health" placeholder="50字以内" maxlength="150">
+                    </BootstrapInput>
+                </div>
+                
+                }
+               @*HttpRequest 请求配置*@
+            <div class="form-group col-12 col-sm-6">
+                @if (context.HttpRequest == null) context.HttpRequest = new Model.Entity.ForwarderRequest();
+                <BootstrapInput @bind-Value="@context.HttpRequest.Version" placeholder="" maxlength="50">
+                    <RequiredValidator />
+                    <StringLengthValidator Length="50" />
+                </BootstrapInput>
+                 <BootstrapInput @bind-Value="@context.HttpRequest.ActivityTimeout" placeholder="" maxlength="50">
+                    <RequiredValidator />
+                    <StringLengthValidator Length="50" />
+                </BootstrapInput>
+ 
+            </div>
+             <div class="form-group col-12 col-sm-6">
+                <Select Items="Items3"   @bind-Value="@context.LoadBalancingPolicy"></Select>
+            </div>
+        </div>
+    </EditTemplate>
+
+
+
+</Table>
+

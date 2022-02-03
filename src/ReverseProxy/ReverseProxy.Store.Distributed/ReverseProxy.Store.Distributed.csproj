@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	  <Version>1.0.3</Version>
+	  <Authors>FunShow</Authors>
+	  <Description>https://github.com/fanslead/ReverseProxy.Store</Description>
+	  <PackageProjectUrl>https://github.com/fanslead/ReverseProxy.Store</PackageProjectUrl>
+	  <RepositoryUrl>https://github.com/fanslead/ReverseProxy.Store</RepositoryUrl>
+	  <PackageTags>ReverseProxy,yarp</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StackExchange.Redis" Version="2.2.88" />
+    <PackageReference Include="StackExchange.Redis.Extensions.Core" Version="7.2.1" />
+    <PackageReference Include="StackExchange.Redis.Extensions.Newtonsoft" Version="7.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ReverseProxy.Store\ReverseProxy.Store.csproj" />
+  </ItemGroup>
+
+</Project>
